@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SISTEMA CENTRAL // ANTONY</title>
+
+    <!-- ═══ PWA / ICONS ═══ -->
+    <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAAAAAAIAAlAQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAAOxJREFUeJylU7ERgzAMfHwcBe6pMgWrZAVSZAmTUDEBFGSFrMIUVPRucYrIIIxMkehOd5LQSy9LJCrLHf4Q9QtoaSyWxgIAUh4EAGW092+HbkYPYSGRAYFL0ou3fVHf5Fs1yx1XtK5C6zrmP5jdoXXVDiN1VkbfJWYUL/l4id+CBK7edgW/rhvtpbE9gFEZPUS3wMGS7yUN/Hlp7JPsOkxm36IFinUEoaMyuqZCPYAJODkkPrPkb1VPVhiuUVxlQHEAMBLFg/DX97FEZbmLnHFJOTOAguxRGT3w/PCQdkxIJ2+H/8LKIADLjxWRD625kGF9ePL7AAAAAElFTkSuQmCC">
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACD0lEQVR4nGNkYuP6zzCAgGkgLR8UDmAhR9O/pq+puOSY6rhn08QByJbiswRd3b+mr+gOROEzYkuE6JoYGBhSSfUZkmMw9CE7gigHoLv6X9PX6UjcVwwMDGJIajPRHQFzPMxcFPOY2Lj+o2OGjv8wnIImPo2h4/80NLEGItSkIJuLIofPAegG41DbgEMcwxGkOADD59jU4XMALkdgqKHEckIOIMoRBFLxdPRERSpgquPOREu0qPKUGE4VgCt4CAW9Q+HCM2mb//9P2/z/v5pr0l18atHNQ4kGch0urefEDGM75M1VIjsAyNLEwvaXW0TGAFksZS1G6UkUwFcXvPrX9LURm4SGEAMfAwNDIbo4LvXkOkAMVw5Qbd1zikHSEkOcqY67HpdhuHICWVEgrGgggi726cW9c+SYRbIDBOW03rOwcyq+vXfh9JxgboZZVxkaf339eINXXEGBgYmJ5OYdigOg9XcqlI21ANH2zrrPwMDA+OrOWXgu+PTi7mdGRiYhFevQ+9gsQS7QkGtHDAcQA2QMXJgYGBgYnlzYLQwTe3XzFAsDAwODqmPMG1LNG/C6YMBrQ4wogLZaZqO17fBWKNgAekUGMxcjBnBGDVKCRHYEIYfA1KBZjrMVjdEmRG+3oadamCVIXEJtQnSPEecANEC1VjFZzXKmOm6y+wWEHInVAYQANXtGZDmAmmDAm2QAD8brEgjZWU8AAAAASUVORK5CYII=">
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlNpc3RlbWEgQ2VudHJhbCAvLyBBbnRvbnkiLAogICJzaG9ydF9uYW1lIjogIkFOVE9OWSIsCiAgImRlc2NyaXB0aW9uIjogIlNpc3RlbWEgQ2VudHJhbCBkZSBBY2Vzc28iLAogICJzdGFydF91cmwiOiAiLi8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiMwMjA2MGEiLAogICJ0aGVtZV9jb2xvciI6ICIjMDA4OGZmIiwKICAib3JpZW50YXRpb24iOiAicG9ydHJhaXQiLAogICJpY29ucyI6IFsKICAgIHsgInNyYyI6ICJpY29uLTE5Mi5wbmciLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyIgfSwKICAgIHsgInNyYyI6ICJpY29uLTUxMi5wbmciLCAic2l6ZXMiOiAiNTEyeDUxMiIsICJ0eXBlIjogImltYWdlL3BuZyIgfQogIF0KfQ==">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ANTONY">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0088ff">
+    <meta name="msapplication-TileColor" content="#02060a">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        :root {
+            --jarvis-blue:   #0088ff;
+            --jarvis-light:  #66b3ff;
+            --jarvis-dark:   #02060a;
+            --jarvis-panel:  rgba(0, 136, 255, 0.05);
+            --jarvis-danger: #ff4444;
+            --jarvis-green:  #00ff88;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--jarvis-dark);
+            background-image:
+                radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,136,255,0.15) 0%, transparent 50%),
+                linear-gradient(rgba(0,136,255,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,136,255,0.05) 1px, transparent 1px);
+            background-size: 100% 100%, 30px 30px, 30px 30px;
+            background-position: 0 0, var(--grid-x,0px) var(--grid-y,0px), var(--grid-x,0px) var(--grid-y,0px);
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--jarvis-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding: 50px 0;
+            cursor: none;
+        }
+
+        /* ═══ VIGNETTE ═══ */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.15);
+            pointer-events: none;
+            z-index: 10;
+            box-shadow: inset 0 0 140px rgba(0,0,0,0.95);
+        }
+
+        /* ═══ SCANLINE CRT ═══ */
+        .scanline-overlay {
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.12) 50%),
+                linear-gradient(90deg, rgba(255,0,0,0.025), rgba(0,255,0,0.01), rgba(0,0,255,0.025));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            z-index: 500;
+            animation: scanline-drift 8s linear infinite;
+        }
+        @keyframes scanline-drift {
+            0%   { background-position: 0 0, 0 0; }
+            100% { background-position: 0 100vh, 0 0; }
+        }
+
+        /* ═══ SHUTDOWN ═══ */
+        #shutdown-overlay {
+            position: fixed; inset: 0;
+            background: black;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2s cubic-bezier(0.4, 0, 1, 1);
+        }
+        body.system-off #shutdown-overlay { opacity: 1; pointer-events: all; }
+        body.system-off * { animation-play-state: paused !important; }
+
+        /* ═══ HUD CONTAINER ═══ */
+        .hud-container {
+            width: 90%;
+            max-width: 700px;
+            border: 1px solid rgba(0,136,255,0.3);
+            padding: 40px;
+            position: relative;
+            background: var(--jarvis-panel);
+            box-shadow: 0 0 25px rgba(0,136,255,0.15), inset 0 0 20px rgba(0,136,255,0.05);
+            overflow: hidden;
+            z-index: 20;
+        }
+
+        /* ═══ CORNER BRACKETS — all four ═══ */
+        .corner {
+            position: absolute;
+            width: 22px; height: 22px;
+            border: 2px solid var(--jarvis-blue);
+            z-index: 10;
+        }
+        .corner-tl { top: 0; left: 0;   border-right: none; border-bottom: none; }
+        .corner-tr { top: 0; right: 0;  border-left: none;  border-bottom: none; }
+        .corner-bl { bottom: 0; left: 0;  border-right: none; border-top: none; }
+        .corner-br { bottom: 0; right: 0; border-left: none;  border-top: none; }
+
+        /* ═══ BORDER SCANNERS ═══ */
+        .border-scanner {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--jarvis-blue), transparent);
+            z-index: 2; opacity: 0.6;
+        }
+        .scanner-top    { top: 0;    left: 0;  width: 100%; height: 1px; animation: scan-h 4s linear infinite; }
+        .scanner-bottom { bottom: 0; right: 0; width: 100%; height: 1px; animation: scan-h 4s linear infinite reverse; }
+        .scanner-right  { top: 0;  right: 0; width: 1px; height: 100%; background: linear-gradient(180deg, transparent, var(--jarvis-blue), transparent); animation: scan-v 4s linear infinite; }
+        .scanner-left   { top: 0;  left: 0;  width: 1px; height: 100%; background: linear-gradient(180deg, transparent, var(--jarvis-blue), transparent); animation: scan-v 4s linear infinite reverse; }
+        @keyframes scan-h { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        @keyframes scan-v { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+
+        /* ═══ ACTIVITY INDICATOR ═══ */
+        .system-activity-indicator {
+            display: flex; justify-content: center; align-items: center;
+            height: 20px; margin: 0 auto 20px auto;
+        }
+        .activity-bar {
+            width: 4px; height: 4px;
+            background: var(--jarvis-blue); border-radius: 50%; margin: 0 3px;
+            animation: pulse-activity 1.2s ease-in-out infinite alternate;
+        }
+        .activity-bar:nth-child(2) { animation-delay: 0.2s; }
+        .activity-bar:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pulse-activity {
+            0%   { transform: scale(0.7); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* ═══ SYSTEM HEADER ═══ */
+        .system-header {
+            text-align: center;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            border-bottom: 1px solid rgba(0,136,255,0.3);
+            padding-bottom: 15px;
+        }
+        .system-header h1 {
+            font-size: 36px; margin: 0;
+            text-shadow: 0 0 10px var(--jarvis-blue);
+            color: var(--jarvis-light);
+            position: relative; display: inline-block;
+        }
+        .system-header h1::after {
+            content: ''; position: absolute;
+            bottom: -2px; left: 0; width: 0; height: 2px;
+            background: var(--jarvis-blue);
+            box-shadow: 0 0 8px var(--jarvis-blue);
+            transition: width 0.8s ease-out;
+        }
+        .system-header h1.underline-active::after { width: 100%; }
+        .system-header p { font-size: 12px; margin-top: 5px; opacity: 0.8; }
+
+        /* ═══ GLITCH ═══ */
+        .glitch-active { animation: glitch-anim 0.2s linear infinite; }
+        @keyframes glitch-anim {
+            0%   { transform: translate(0);         text-shadow:  2px 0 #ff00c1, -2px 0 #00fff9; }
+            25%  { transform: translate(-2px, 2px); }
+            50%  { transform: translate(2px, -2px); text-shadow: -2px 0 #ff00c1,  2px 0 #00fff9; }
+            75%  { transform: translate(-1px, 1px); }
+            100% { transform: translate(0); }
+        }
+
+        /* ═══ TYPING CURSOR ═══ */
+        .typing-cursor::after {
+            content: '█'; animation: blink 1s step-start infinite;
+            margin-left: 5px; color: var(--jarvis-light);
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* ═══ LOADER ═══ */
+        .loader-container { width: 100%; height: 2px; background: rgba(0,136,255,0.1); margin-bottom: 20px; display: none; }
+        .loader-bar { width: 0%; height: 100%; background: var(--jarvis-blue); box-shadow: 0 0 10px var(--jarvis-blue); transition: width 0.05s; }
+
+        /* ═══ LOG BOOT (novo) ═══ */
+        #boot-log {
+            text-align: left;
+            font-size: 10px;
+            color: var(--jarvis-blue);
+            opacity: 0.6;
+            min-height: 60px;
+            margin-bottom: 15px;
+            display: none;
+        }
+        #boot-log .log-line {
+            display: block;
+            animation: fade-in-line 0.1s ease forwards;
+        }
+        @keyframes fade-in-line { from { opacity: 0; transform: translateX(-5px); } to { opacity: 1; transform: none; } }
+
+        /* ═══ LINK GRID ═══ */
+        .link-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+
+        .hud-link {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 20px;
+            color: var(--jarvis-blue); text-decoration: none;
+            border: 1px solid rgba(0,136,255,0.2);
+            background: rgba(0,136,255,0.06);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+            position: relative; overflow: hidden;
+            transition: all 0.3s ease, opacity 0.5s ease, transform 0.5s ease;
+            opacity: 0; transform: translateY(15px);
+            cursor: none;
+        }
+        .hud-link.revealed { opacity: 1; transform: translateY(0); }
+        .hud-link::before {
+            content: '▶'; position: absolute; left: 8px;
+            opacity: 0; color: var(--jarvis-light);
+            font-size: 8px;
+            transition: opacity 0.3s ease;
+        }
+        .hud-link:hover { background: rgba(0,136,255,0.12); border-color: var(--jarvis-light); transform: scale(1.02); padding-left: 28px; animation: neon-pulse 1.5s infinite alternate; }
+        .hud-link:hover::before { opacity: 1; text-shadow: 0 0 5px var(--jarvis-light); }
+
+        /* Shimmer on hover */
+        .hud-link::after {
+            content: '';
+            position: absolute; top: 0; left: -100%;
+            width: 60%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,136,255,0.08), transparent);
+            transition: left 0.4s ease;
+        }
+        .hud-link:hover::after { left: 150%; }
+
+        @keyframes neon-pulse {
+            0%   { box-shadow: 0 0 5px rgba(0,136,255,0.4),  inset 0 0 2px rgba(0,136,255,0.2); }
+            100% { box-shadow: 0 0 20px rgba(0,136,255,0.8), inset 0 0 10px rgba(0,136,255,0.4); }
+        }
+
+        .link-info h2 { font-size: 16px; margin: 0 0 5px 0; text-transform: uppercase; letter-spacing: 2px; color: var(--jarvis-light); }
+        .link-info p  { font-size: 12px; margin: 0; opacity: 0.7; }
+
+        .status-badge {
+            font-size: 10px; padding: 3px 8px;
+            border: 1px solid currentColor;
+            border-radius: 2px;
+            background: rgba(0,136,255,0.1);
+            color: var(--jarvis-light);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .status-badge.green  { color: var(--jarvis-green); border-color: var(--jarvis-green); background: rgba(0,255,136,0.07); }
+        .status-badge.yellow { color: #ffcc00; border-color: #ffcc00; background: rgba(255,204,0,0.07); }
+
+        /* ═══ SYSTEM FOOTER ═══ */
+        .system-footer {
+            margin-top: 30px; padding-top: 15px;
+            border-top: 1px solid rgba(0,136,255,0.2);
+            display: flex; justify-content: space-between;
+            font-size: 10px; opacity: 0.6; letter-spacing: 1px; align-items: center;
+        }
+        .wave-analyzer {
+            display: flex; align-items: flex-end;
+            height: 15px; width: 40px; margin: 0 10px;
+        }
+        .wave-analyzer .bar {
+            width: 3px; background: var(--jarvis-blue); margin: 0 1px;
+            animation: analyze-wave 1s ease-in-out infinite alternate;
+            transform-origin: bottom;
+        }
+        .wave-analyzer .bar:nth-child(1) { animation-delay: 0.0s; }
+        .wave-analyzer .bar:nth-child(2) { animation-delay: 0.1s; }
+        .wave-analyzer .bar:nth-child(3) { animation-delay: 0.2s; }
+        .wave-analyzer .bar:nth-child(4) { animation-delay: 0.3s; }
+        .wave-analyzer .bar:nth-child(5) { animation-delay: 0.4s; }
+        @keyframes analyze-wave {
+            0%   { height: 20%; opacity: 0.5; }
+            50%  { height: 100%; opacity: 1; }
+            100% { height: 20%; opacity: 0.5; }
+        }
+
+        /* ═══ SHUTDOWN BTN ═══ */
+        .shutdown-btn {
+            color: var(--jarvis-danger);
+            border: 1px solid var(--jarvis-danger);
+            background: rgba(255,68,68,0.07);
+            cursor: none;
+            font-family: inherit; font-size: 10px;
+            padding: 2px 6px; transition: all 0.3s;
+        }
+        .shutdown-btn:hover {
+            background: var(--jarvis-danger); color: white;
+            box-shadow: 0 0 10px var(--jarvis-danger);
+        }
+
+        /* ═══ HUD CURSOR ═══ */
+        #hud-cursor {
+            position: fixed; top: 0; left: 0;
+            width: 40px; height: 40px;
+            border: 1px solid rgba(0,136,255,0.5);
+            border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            display: flex; justify-content: center; align-items: center;
+            transition: width 0.15s, height 0.15s, border-color 0.15s;
+        }
+        #hud-cursor::before { content: ''; position: absolute; background: var(--jarvis-blue); box-shadow: 0 0 5px var(--jarvis-blue); width: 50px; height: 1px; opacity: 0.3; }
+        #hud-cursor::after  { content: ''; position: absolute; background: var(--jarvis-blue); box-shadow: 0 0 5px var(--jarvis-blue); width: 1px; height: 50px; opacity: 0.3; }
+        .cursor-inner { width: 4px; height: 4px; background: var(--jarvis-light); border-radius: 50%; box-shadow: 0 0 10px var(--jarvis-light); }
+        .cursor-coords { position: absolute; top: 25px; left: 25px; font-size: 8px; color: var(--jarvis-light); opacity: 0.5; white-space: nowrap; letter-spacing: 1px; }
+
+        @keyframes cursor-pulse-click {
+            0%   { transform: translate(-50%,-50%) scale(1);   border-color: var(--jarvis-blue); }
+            30%  { transform: translate(-50%,-50%) scale(1.8); border-color: var(--jarvis-danger); }
+            100% { transform: translate(-50%,-50%) scale(1);   border-color: rgba(0,136,255,0.5); }
+        }
+        .cursor-clicked { animation: cursor-pulse-click 0.3s ease-out; }
+        .cursor-clicked .cursor-inner { background: var(--jarvis-danger) !important; box-shadow: 0 0 15px var(--jarvis-danger) !important; }
+
+        /* ═══ PARTICLES ═══ */
+        .particle {
+            position: fixed; pointer-events: none; z-index: 9998;
+            border-radius: 50%; background: var(--jarvis-blue);
+            box-shadow: 0 0 4px var(--jarvis-blue);
+            animation: particle-fade 0.8s ease-out forwards;
+        }
+        @keyframes particle-fade {
+            0%   { opacity: 0.7; transform: translate(0,0); }
+            100% { opacity: 0;   transform: translate(var(--dx), var(--dy)); }
+        }
+
+        /* ═══ KEYBOARD SHORTCUTS HINT (novo) ═══ */
+        #shortcut-hint {
+            position: fixed; bottom: 15px; right: 15px;
+            font-size: 9px; color: var(--jarvis-blue); opacity: 0;
+            z-index: 100; letter-spacing: 1px;
+            transition: opacity 0.5s;
+            pointer-events: none;
+        }
+        #shortcut-hint.visible { opacity: 0.35; }
+        #shortcut-hint div { margin-top: 3px; }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 600px) {
+            body { padding: 20px 0; align-items: flex-start; cursor: auto; }
+            .hud-container { width: 95%; padding: 20px 15px; margin: 10px auto; }
+            .system-header h1 { font-size: 24px; letter-spacing: 2px; }
+            .hud-link { flex-direction: column; align-items: flex-start; gap: 10px; padding: 15px; cursor: pointer; }
+            .status-badge { align-self: flex-end; }
+            .system-footer { flex-direction: column; gap: 15px; text-align: center; }
+            #hud-cursor { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PWA icons also need physical files for the manifest to work when hosted.   -->
+    <!-- The data URIs handle the browser tab/favicon; physical files handle the PWA. -->
+
+    <div class="scanline-overlay"></div>
+    <div id="shutdown-overlay"></div>
+    <div id="shortcut-hint">
+        <div>[ ? ] ATALHOS</div>
+        <div>1-4 · ABRIR MÓDULO</div>
+        <div>R   · REINICIAR</div>
+        <div>ESC · FECHAR HINT</div>
+    </div>
+
+    <div id="hud-cursor">
+        <div class="cursor-inner"></div>
+        <div class="cursor-coords">0000 // 0000</div>
+    </div>
+
+    <div class="hud-container">
+        <div class="corner corner-tl"></div>
+        <div class="corner corner-tr"></div>
+        <div class="corner corner-bl"></div>
+        <div class="corner corner-br"></div>
+
+        <div class="border-scanner scanner-top"></div>
+        <div class="border-scanner scanner-right"></div>
+        <div class="border-scanner scanner-bottom"></div>
+        <div class="border-scanner scanner-left"></div>
+
+        <div class="system-header">
+            <div id="loader-wrap" class="loader-container">
+                <div id="loader-bar" class="loader-bar"></div>
+            </div>
+            <div class="system-activity-indicator">
+                <span class="activity-bar"></span>
+                <span class="activity-bar"></span>
+                <span class="activity-bar"></span>
+            </div>
+            <h1 id="boot-title"></h1>
+            <p id="boot-status"></p>
+        </div>
+
+        <div id="boot-log"></div>
+
+        <div class="link-grid" id="main-menu">
+            <a href="https://memorial.antonyfreitas.com.br" class="hud-link" target="_blank" data-index="1">
+                <div class="link-info">
+                    <h2>Memorial de Casamento</h2>
+                    <p>Banco de memórias e registros · 01/05/2026</p>
+                </div>
+                <span class="status-badge green">SINCRONIZADO</span>
+            </a>
+            <a href="https://app.antonyfreitas.com.br" class="hud-link" target="_blank" data-index="2">
+                <div class="link-info">
+                    <h2>Finanças Pessoais</h2>
+                    <p>Módulo de gestão e análise de ativos</p>
+                </div>
+                <span class="status-badge green">ATIVO</span>
+            </a>
+            <a href="https://pomodoro.antonyfreitas.com.br" class="hud-link" target="_blank" data-index="3">
+                <div class="link-info">
+                    <h2>Foco &amp; Produtividade</h2>
+                    <p>Timer Pomodoro · Otimização de ciclos de trabalho</p>
+                </div>
+                <span class="status-badge green">ONLINE</span>
+            </a>
+            <a href="https://portifolio.antonyfreitas.com.br" class="hud-link" target="_blank" data-index="4">
+                <div class="link-info">
+                    <h2>Portfólio Profissional</h2>
+                    <p>Repositório de projetos, stack e experiência</p>
+                </div>
+                <span class="status-badge yellow">CONSULTAR</span>
+            </a>
+        </div>
+
+        <div class="system-footer">
+            <div class="log-entry">[DATE_STAMP]: <span id="current-date">--/--/----</span></div>
+            <div class="wave-analyzer">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+                <span class="bar"></span><span class="bar"></span>
+            </div>
+            <div class="log-entry">[SYS_CLOCK]: <span id="current-time">00:00:00</span></div>
+        </div>
+        <div style="text-align:right; margin-top:10px;">
+            <button class="shutdown-btn" onclick="shutdownSystem()">[ POWER_OFF ]</button>
+        </div>
+    </div>
+
+    <script>
+        // ─── TYPEWRITER ───────────────────────────────────────────
+        function typeWriter(elementId, text, speed, callback) {
+            const el = document.getElementById(elementId);
+            el.innerHTML = ''; el.classList.add('typing-cursor');
+            let i = 0;
+            const t = setInterval(() => {
+                if (i < text.length) { el.innerHTML += text.charAt(i++); }
+                else {
+                    clearInterval(t); el.classList.remove('typing-cursor');
+                    if (callback) callback();
+                }
+            }, speed);
+        }
+
+        // ─── AUDIO ────────────────────────────────────────────────
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function playSound(freq, dur, vol = 0.04) {
+            try {
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+                osc.connect(gain); gain.connect(audioCtx.destination);
+                osc.start(); osc.stop(audioCtx.currentTime + dur);
+            } catch(e) {}
+        }
+
+        // ─── DATE / TIME ──────────────────────────────────────────
+        function updateDateTime() {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR');
+            document.getElementById('current-time').textContent = now.toLocaleTimeString('pt-BR', {hour12:false});
+        }
+
+        // ─── GLITCH ───────────────────────────────────────────────
+        function triggerRandomGlitch() {
+            const title = document.getElementById('boot-title');
+            title.classList.add('glitch-active');
+            setTimeout(() => {
+                title.classList.remove('glitch-active');
+                setTimeout(triggerRandomGlitch, Math.random() * 7000 + 3000);
+            }, 100 + Math.random() * 200);
+        }
+
+        // ─── BOOT LOG ─────────────────────────────────────────────
+        const bootMessages = [
+            'INIT KERNEL v4.2.1...',
+            'LOADING MEMORY MODULES... OK',
+            'SYNCING ENCRYPTED VAULT... OK',
+            'ESTABLISHING SECURE LINK... OK',
+            'VERIFYING IDENTITY... CONFIRMED',
+            'ALL SYSTEMS NOMINAL.',
+        ];
+
+        function runBootLog(callback) {
+            const logEl = document.getElementById('boot-log');
+            logEl.style.display = 'block';
+            logEl.innerHTML = '';
+            let idx = 0;
+            function nextLine() {
+                if (idx >= bootMessages.length) {
+                    setTimeout(() => { logEl.style.display = 'none'; if (callback) callback(); }, 300);
+                    return;
+                }
+                const span = document.createElement('span');
+                span.className = 'log-line';
+                span.textContent = '> ' + bootMessages[idx++];
+                logEl.appendChild(span);
+                playSound(300 + idx * 40, 0.04, 0.02);
+                logEl.scrollTop = logEl.scrollHeight;
+                setTimeout(nextLine, 120 + Math.random() * 80);
+            }
+            nextLine();
+        }
+
+        // ─── BOOT SEQUENCE ────────────────────────────────────────
+        function startSystem() {
+            updateDateTime(); setInterval(updateDateTime, 1000);
+
+            const loaderWrap = document.getElementById('loader-wrap');
+            const loaderBar  = document.getElementById('loader-bar');
+            loaderWrap.style.display = 'block';
+
+            let width = 0;
+            const loading = setInterval(() => {
+                width += Math.random() * 25;
+                if (width >= 100) {
+                    width = 100; clearInterval(loading);
+                    loaderBar.style.width = '100%';
+                    playSound(800, 0.2, 0.05);
+                    setTimeout(() => {
+                        loaderWrap.style.display = 'none';
+                        runBootLog(() => {
+                            typeWriter('boot-title', 'SISTEMA // ANTONY', 30, () => {
+                                document.getElementById('boot-title').classList.add('underline-active');
+                                triggerRandomGlitch();
+                                typeWriter('boot-status', 'STATUS: ONLINE | SECURITY: ENCRYPTED', 20, () => {
+                                    setTimeout(() => {
+                                        document.querySelectorAll('.hud-link').forEach((link, i) => {
+                                            setTimeout(() => {
+                                                link.classList.add('revealed');
+                                                playSound(600, 0.06, 0.03);
+                                            }, i * 90);
+                                        });
+                                        setTimeout(() => { document.getElementById('shortcut-hint').classList.add('visible'); }, 800);
+                                    }, 200);
+                                });
+                            });
+                        });
+                    }, 200);
+                } else {
+                    loaderBar.style.width = width + '%';
+                    playSound(200, 0.05, 0.015);
+                }
+            }, 50);
+        }
+
+        // ─── SHUTDOWN ─────────────────────────────────────────────
+        function shutdownSystem() {
+            playSound(150, 0.5, 0.1);
+            document.body.classList.add('system-off');
+            setTimeout(() => location.reload(), 3000);
+        }
+
+        // ─── KEYBOARD SHORTCUTS ───────────────────────────────────
+        document.addEventListener('keydown', (e) => {
+            const hint = document.getElementById('shortcut-hint');
+            if (e.key === '?') { hint.classList.toggle('visible'); return; }
+            if (e.key === 'Escape') { hint.classList.remove('visible'); return; }
+            if (e.key === 'r' || e.key === 'R') { shutdownSystem(); return; }
+            const idx = parseInt(e.key);
+            if (idx >= 1 && idx <= 4) {
+                const link = document.querySelector(`.hud-link[data-index="${idx}"]`);
+                if (link) { playSound(800, 0.1, 0.05); link.click(); }
+            }
+        });
+
+        // ─── CURSOR ───────────────────────────────────────────────
+        const cursor   = document.getElementById('hud-cursor');
+        const coordsEl = cursor.querySelector('.cursor-coords');
+        let tgtX = 0, tgtY = 0, curX = 0, curY = 0;
+
+        function animateCursor() {
+            curX += (tgtX - curX) * 0.15;
+            curY += (tgtY - curY) * 0.15;
+            cursor.style.left = curX + 'px';
+            cursor.style.top  = curY + 'px';
+            coordsEl.textContent = `${Math.round(curX).toString().padStart(4,'0')} // ${Math.round(curY).toString().padStart(4,'0')}`;
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // ─── MOUSE EVENTS ─────────────────────────────────────────
+        document.addEventListener('mousemove', (e) => {
+            tgtX = e.clientX; tgtY = e.clientY;
+            document.body.style.setProperty('--mouse-x', e.clientX + 'px');
+            document.body.style.setProperty('--mouse-y', e.clientY + 'px');
+            const mx = (e.clientX - window.innerWidth  / 2) * 0.02;
+            const my = (e.clientY - window.innerHeight / 2) * 0.02;
+            document.body.style.setProperty('--grid-x', mx + 'px');
+            document.body.style.setProperty('--grid-y', my + 'px');
+            if (Date.now() - lastParticle > 40) {
+                spawnParticle(e.clientX, e.clientY);
+                lastParticle = Date.now();
+            }
+        });
+
+        let lastParticle = 0;
+        function spawnParticle(x, y) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            const size = Math.random() * 3 + 1;
+            p.style.width  = size + 'px';
+            p.style.height = size + 'px';
+            p.style.left   = x + 'px';
+            p.style.top    = y + 'px';
+            p.style.setProperty('--dx', (Math.random() - 0.5) * 50 + 'px');
+            p.style.setProperty('--dy', (Math.random() - 0.5) * 50 + 'px');
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 800);
+        }
+
+        // ─── LINK SOUNDS ──────────────────────────────────────────
+        document.querySelectorAll('.hud-link').forEach(link => {
+            link.addEventListener('mouseenter', () => playSound(1200, 0.05, 0.025));
+            link.addEventListener('mousedown', () => {
+                const c = document.getElementById('hud-cursor');
+                c.classList.remove('cursor-clicked');
+                void c.offsetWidth;
+                c.classList.add('cursor-clicked');
+                playSound(400, 0.1, 0.05);
+            });
+        });
+
+        window.onload = () => startSystem();
+    </script>
+</body>
+</html>
