@@ -639,7 +639,7 @@
             setTimeout(() => p.remove(), 800);
         }
 
-        // ─── LINK SOUNDS ──────────────────────────────────────────
+        // ─── LINK SOUNDS + TOUCH FEEDBACK ────────────────────────
         document.querySelectorAll('.hud-link').forEach(link => {
             link.addEventListener('mouseenter', () => playSound(1200, 0.05, 0.025));
             link.addEventListener('mousedown', () => {
@@ -649,7 +649,105 @@
                 c.classList.add('cursor-clicked');
                 playSound(400, 0.1, 0.05);
             });
+
+            // Touch: haptic + sound + ripple on tap
+            link.addEventListener('touchstart', (e) => {
+                playSound(400, 0.1, 0.05);
+                vibrate([10]);
+                const t = e.touches[0];
+                spawnTouchBurst(t.clientX, t.clientY);
+            }, { passive: true });
         });
+
+        // ─── HAPTIC WRAPPER ───────────────────────────────────────
+        function vibrate(pattern) {
+            if (navigator.vibrate) navigator.vibrate(pattern);
+        }
+
+        // ─── TOUCH EVENTS ─────────────────────────────────────────
+        let lastTouchParticle = 0;
+
+        document.addEventListener('touchmove', (e) => {
+            const t = e.touches[0];
+            const x = t.clientX, y = t.clientY;
+
+            // Spotlight follows finger
+            document.body.style.setProperty('--mouse-x', x + 'px');
+            document.body.style.setProperty('--mouse-y', y + 'px');
+
+            // Grid parallax follows finger
+            const mx = (x - window.innerWidth  / 2) * 0.025;
+            const my = (y - window.innerHeight / 2) * 0.025;
+            document.body.style.setProperty('--grid-x', mx + 'px');
+            document.body.style.setProperty('--grid-y', my + 'px');
+
+            // Particles on drag
+            if (Date.now() - lastTouchParticle > 35) {
+                spawnParticle(x, y);
+                lastTouchParticle = Date.now();
+            }
+        }, { passive: true });
+
+        // Touch burst: bigger explosion on tap
+        function spawnTouchBurst(x, y) {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    const size = Math.random() * 5 + 2;
+                    p.style.width  = size + 'px';
+                    p.style.height = size + 'px';
+                    p.style.left   = x + 'px';
+                    p.style.top    = y + 'px';
+                    p.style.setProperty('--dx', (Math.random() - 0.5) * 80 + 'px');
+                    p.style.setProperty('--dy', (Math.random() - 0.5) * 80 + 'px');
+                    document.body.appendChild(p);
+                    setTimeout(() => p.remove(), 900);
+                }, i * 20);
+            }
+        }
+
+        // ─── GYROSCOPE PARALLAX (iPhone) ──────────────────────────
+        // Needs user gesture to request permission on iOS 13+
+        function requestGyro() {
+            if (typeof DeviceOrientationEvent !== 'undefined' &&
+                typeof DeviceOrientationEvent.requestPermission === 'function') {
+                // iOS 13+ requires explicit permission
+                DeviceOrientationEvent.requestPermission()
+                    .then(state => { if (state === 'granted') attachGyro(); })
+                    .catch(() => {});
+            } else {
+                // Android / older iOS — just attach
+                attachGyro();
+            }
+        }
+
+        function attachGyro() {
+            window.addEventListener('deviceorientation', (e) => {
+                if (e.beta === null || e.gamma === null) return;
+                // beta  = front/back tilt (-180 to 180)
+                // gamma = left/right tilt (-90 to 90)
+                const tiltX = Math.max(-30, Math.min(30, e.gamma)); // clamp
+                const tiltY = Math.max(-30, Math.min(30, e.beta - 45)); // 45° = natural hold angle
+
+                const mx = tiltX * 0.4;
+                const my = tiltY * 0.4;
+                document.body.style.setProperty('--grid-x', mx + 'px');
+                document.body.style.setProperty('--grid-y', my + 'px');
+
+                // Subtle spotlight drift with gyro
+                const sx = 50 + tiltX * 0.8;
+                const sy = 50 + tiltY * 0.5;
+                document.body.style.setProperty('--mouse-x', sx + '%');
+                document.body.style.setProperty('--mouse-y', sy + '%');
+            }, { passive: true });
+        }
+
+        // Request gyro on first touch (user gesture satisfies iOS requirement)
+        let gyroRequested = false;
+        document.addEventListener('touchstart', () => {
+            if (!gyroRequested) { gyroRequested = true; requestGyro(); }
+        }, { once: true, passive: true });
 
         window.onload = () => startSystem();
     </script>
